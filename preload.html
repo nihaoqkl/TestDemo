@@ -1,0 +1,34 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>测试用于不做直接跳转 - 解决授权服务器用户无法访问的问题</title>
+<script src="http://apps.bdimg.com/libs/jquery/1.11.1/jquery.js"></script>
+<style>
+</style>
+<script>
+function aa(){
+$('.loading').text('加载成功了');
+}
+	$(function(){
+		setTimeout(function(){
+$('.loading').text('加载失败了');
+},8000);
+	});
+</script>
+</head> 
+<body>
+<div class="loading">loading</div>
+<iframe src="http://localhost/iframe.php" width="800" height="100"></iframe>
+<?php
+echo "starting";
+
+sleep(10);
+
+echo "end";
+
+echo '<script>parent.aa();</script>';
+
+?>
+</body>
+</html>
