@@ -1,0 +1,4 @@
+apt-get install binutils cpp fetchmail flex gcc libarchive-zip-perl libc6-dev libpcre3 libpopt-dev lynx m4 make ncftp nmap perl perl-modules unzip zip zlib1g-dev autoconf automake1.9 libtool bison autotools-dev g++ build-essential libpcre3-dev libncurses5-dev libcurl4-openssl-dev openssh-server openssh-client
+
+sudo apt-get updatesudo apt-get install build-essential gcc g++ autoconf libiconv-hook-dev libmcrypt-dev libxml2-dev libmysqlclient-dev libcurl4-openssl-dev libjpeg8-dev libpng12-dev libfreetype6-dev snmp mcrypt
+
