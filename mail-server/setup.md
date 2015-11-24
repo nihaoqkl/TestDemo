@@ -40,5 +40,17 @@ PS：如果做过smtp和pop端口修改的话，发送无问题，会出现无�
 
 自行测试不做教程
 
+##增加webmail
+https://github.com/afterlogic/webmail-lite
+添加虚拟主机到wemail-lite目录
+浏览器打开http://mai.qklin.com/install/
+只管next 遇到mysql配置的话，新建一个webmail数据库下一步
+删除install目录
+浏览器打开http://mai.qklin.com/adminpanel，输入用戶:mailadm和密码
+进入后点击Domains——Default domain settins
+language选择chinese，timezone选择北京+8
+现在直接打开http://mai.qklin.com/ 用hmailserver的邮箱账号和密码登陆即可使用
+
+
 
 
