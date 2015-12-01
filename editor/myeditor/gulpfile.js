@@ -2,6 +2,10 @@ var gulp = require('gulp'),
     less = require('gulp-less'),
     path = require('path');
 
+var paths = {
+    less: ['./gulp/less/**/*.less']
+};
+
 gulp.task('less', function () {
     return gulp.src('./gulp/less/**/*.less')
         .pipe(less({
@@ -9,3 +13,9 @@ gulp.task('less', function () {
         }))
         .pipe(gulp.dest('./asset'));
 });
+
+gulp.task('watch', function() {
+    gulp.watch(paths.less, ['less']);
+});
+
+gulp.task('default', ['less','watch']);
