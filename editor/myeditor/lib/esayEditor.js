@@ -61,6 +61,7 @@
                         '<li><a href="#" data-cmd="strike"><i class="icon iconfont"></i></a></li>'+
                         '<li><a href="#" data-cmd="underline"><i class="icon iconfont"></i></a></li>'+
                         '<li><a href="#" data-cmd="char"><i class="icon iconfont"></i></a></li>'+
+                        '<li><a href="#" class="ee-remove"><i class="icon iconfont"></i></a></li>'+
                         '</ul></div>',
 
         }
@@ -111,7 +112,18 @@
                 $(v).on('click',function(e){
                     var that = $(this);
                     _frame.focus();
-                    _doc.execCommand(that.data('cmd'),false,'');
+                    _doc.execCommand(that.data('cmd'),false,null);
+                    if(that.hasClass('ee-remove')){
+                        that.on('click',function(){
+                            var selection=_doc.getSelection(),
+                                    range=_doc.getSelection().getRangeAt(0);
+                            // console.log(_doc.queryCommandState('bold')); //判断当前的range是否执行过
+                            if(utils.type(range)!='null' && range.toString().length>=1){
+                                // $(selection.anchorNode.parentNode).remove();
+                                range.deleteContents();
+                            }
+                        });
+                    }
                 });
             });
 
@@ -123,9 +135,10 @@
             //浮动条和range检测处理等
             $(_doc).on('mouseup',function(e){
                 var range=_doc.getSelection().getRangeAt(0);
-                console.log(_doc.queryCommandState('bold'));
+                // console.log(_doc.queryCommandState('bold')); //判断当前的range是否执行过
                 if(utils.type(range)!='null' && range.toString().length>=1){
-                    $(document).find('.floatBar'+index).show().css({left: e.clientX,top: e.clientY});
+                    //快捷浮动条
+                    $(document).find('.floatBar'+index).show().css({left: e.clientX-58+'px',top: e.clientY-20+'px'});
                 } else {
                     $(document).find('.floatBar'+index).hide();
                 }
