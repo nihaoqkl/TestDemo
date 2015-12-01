@@ -54,7 +54,7 @@
                         '<li><a href="#" data-cmd="underline"><i class="icon iconfont"></i></a></li>'+
                         '<li><a href="#" data-cmd="char"><i class="icon iconfont"></i></a></li>'+
                         '</ul></div>',
-            fastBar: '<div class="'+$prefix+'fastBar">'+
+            floatBar: '<div class="'+$prefix+'floatBar">'+
                         '<ul class="clearfix">'+
                         '<li><a href="#" data-cmd="bold"><i class="icon iconfont"></i></a></li>'+
                         '<li><a href="#" data-cmd="italic"><i class="icon iconfont"></i></a></li>'+
@@ -93,6 +93,7 @@
         initToolBar:function(){
             //暂时写死，后续动态根据配置
             $('#'+this.getCurrentEditorSelector()).before($(eE.CommonTemplate.toolBar).addClass('toolBar'+this.getIndex()));
+            $('#'+this.getCurrentEditorSelector()).after($(eE.CommonTemplate.floatBar).addClass('floatBar'+this.getIndex()));
         },
         initEvent:function(){
             var editor=this,
@@ -106,11 +107,27 @@
                     _doc.execCommand(that.data('cmd'),false,'');
                 });
             });
+            $('.floatBar'+this.getIndex()).find('a').each(function(i,v){
+                $(v).on('click',function(e){
+                    var that = $(this);
+                    _frame.focus();
+                    _doc.execCommand(that.data('cmd'),false,'');
+                });
+            });
 
-            $(_doc).on('mouseup',function(){
+            var getPoint={};
+            $document.on('mousemove',function(e){
+                getPoint={x: e.clientX,y: e.clientY}
+            });
+
+            //浮动条和range检测处理等
+            $(_doc).on('mouseup',function(e){
                 var range=_doc.getSelection().getRangeAt(0);
+                console.log(_doc.queryCommandState('bold'));
                 if(utils.type(range)!='null' && range.toString().length>=1){
-                    alert(range.toString());
+                    $(document).find('.floatBar'+index).show().css({left: e.clientX,top: e.clientY});
+                } else {
+                    $(document).find('.floatBar'+index).hide();
                 }
             });
 
