@@ -1,0 +1,72 @@
+
+@font-face {font-family: "iconfont";
+  src: url('iconfont.eot'); /* IE9*/
+  src: url('iconfont.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+  url('iconfont.woff') format('woff'), /* chrome, firefox */
+  url('iconfont.ttf') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+*/
+  url('iconfont.svg#iconfont') format('svg'); /* iOS 4.1- */
+}
+
+.iconfont {
+  font-family:"iconfont" !important;
+  font-size:16px;
+  font-style:normal;
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-stroke-width: 0.2px;
+  -moz-osx-font-smoothing: grayscale;
+}
+.icon-image:before { content: "\e63e"; }
+.icon-mark:before { content: "\e63a"; }
+.icon-specialchar:before { content: "\e62b"; }
+.icon-spellcheck:before { content: "\e62c"; }
+.icon-strike:before { content: "\e62d"; }
+.icon-sub:before { content: "\e62e"; }
+.icon-sup:before { content: "\e62f"; }
+.icon-table:before { content: "\e630"; }
+.icon-template:before { content: "\e631"; }
+.icon-ltr:before { content: "\e61b"; }
+.icon-link:before { content: "\e61a"; }
+.icon-italic:before { content: "\e619"; }
+.icon-indent:before { content: "\e618"; }
+.icon-video:before { content: "\e636"; }
+.icon-unorderedlist:before { content: "\e635"; }
+.icon-unlink:before { content: "\e634"; }
+.icon-undo:before { content: "\e633"; }
+.icon-underline:before { content: "\e632"; }
+.icon-nbsp:before { content: "\e61c"; }
+.icon-new:before { content: "\e61d"; }
+.icon-ok:before { content: "\e61e"; }
+.icon-orderedlist:before { content: "\e61f"; }
+.icon-outdent:before { content: "\e620"; }
+.icon-pagebreak:before { content: "\e621"; }
+.icon-paragraph:before { content: "\e622"; }
+.icon-paste:before { content: "\e623"; }
+.icon-pasteastext:before { content: "\e624"; }
+.icon-alignleft:before { content: "\e602"; }
+.icon-alignjustify:before { content: "\e601"; }
+.icon-aligncenter:before { content: "\e600"; }
+.icon-smiley:before { content: "\e62a"; }
+.icon-save:before { content: "\e629"; }
+.icon-rtl:before { content: "\e628"; }
+.icon-redo:before { content: "\e627"; }
+.icon-print:before { content: "\e626"; }
+.icon-preview:before { content: "\e625"; }
+.icon-aligncenter1:before { content: "\e603"; }
+.icon-alignjustify1:before { content: "\e604"; }
+.icon-alignright:before { content: "\e606"; }
+.icon-anchor:before { content: "\e607"; }
+.icon-blockquote:before { content: "\e608"; }
+.icon-bold:before { content: "\e609"; }
+.icon-clearformat:before { content: "\e60b"; }
+.icon-char:before { content: "\e60a"; }
+.icon-fullscreen:before { content: "\e614"; }
+.icon-find:before { content: "\e613"; }
+.icon-explore:before { content: "\e612"; }
+.icon-datetime:before { content: "\e611"; }
+.icon-cut:before { content: "\e610"; }
+.icon-corner:before { content: "\e60f"; }
+.icon-copy:before { content: "\e60e"; }
+.icon-configure:before { content: "\e60d"; }
+.icon-code:before { content: "\e60c"; }
+.icon-help:before { content: "\e615"; }
+.icon-hr:before { content: "\e616"; }

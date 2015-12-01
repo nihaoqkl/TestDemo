@@ -1,0 +1,19 @@
+{
+  "name": "myeditor",
+  "version": "1.0.0",
+  "description": "iframe编辑器学习和demo",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nihaoqkl/testDemo/editor/myeditor"
+  },
+  "author": "qklin",
+  "license": "ISC",
+  "devDependencies": {
+    "gulp": "^3.9.0",
+    "gulp-less": "^3.0.5"
+  }
+}

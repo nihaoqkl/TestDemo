@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="http://apps.bdimg.com/libs/jquery/1.11.1/jquery.js"></script>
+    <script src="./lib/esayEditor.js"></script>
+</head>
+<body>
+<iframe src="" id="myeditor">
+</iframe>
+<a id="selectedValue" href="javascript:;">获取当前选中区域</a>
+<a id="insertHTML" href="javascript:;">获取当前选中区域</a>
+<a id="insertTable" href="javascript:;">获取当前选中区域</a>
+<script type="text/javascript">
+    var _frame = document.getElementById("myeditor");
+    var _window = _frame.contentWindow;
+    var _doc = _frame.contentWindow.document;
+    _doc.designMode="on";//设置为设计模式，就可以填写内容了  开启后注册事件会失效
+    _doc.open();
+    _doc.close();
+//    _window.document.canHaveHTML=true;//.可以包含HTML
+
+
+    //selection   range   exeCommand   IE和W3C（firefox chrome）
+    //事件触发
+    initEditor();
+
+    function initEditor(){
+
+        var domA = document.createElement("a");
+        domA.innerText='我是一个连接';
+        var domDiv = document.createElement("div");
+        domDiv.id='aaa';
+        domDiv.innerHTML='<span>我是一个div</span>';
+
+        _window.document.body.appendChild(domA);
+        _window.document.body.appendChild(domDiv);
+
+    }
+
+    function createElement() {
+
+    }
+
+    $("#selectedValue").click(function() {
+        var range, html;// Firefox下获取选中区域
+        range = _window.getSelection().getRangeAt(0);
+        console.log(range);
+        // 选中区域的HtmlFragment，我们需要一点小技巧来获取Html片段的内容
+        var fragment = range.cloneContents();
+        html = $("<div />").append($(fragment)).html();
+        alert(html);
+    });
+
+    $("#insertHTML").click(function() {
+        var range, html;// Firefox下获取选中区域
+        range = _window.document.getSelection().getRangeAt(0).deleteContents();
+//                .pasteHTML('<div>aaaaa</div>');
+    });
+
+    $("#insertHTML").click(function() {
+        var range, html;// Firefox下获取选中区域
+        range = _window.document.getSelection().getRangeAt(0).deleteContents();
+//                .pasteHTML('<div>aaaaa</div>');
+    });
+
+    $("#insertTable").click(function() {
+        var range = _window.document.getSelection().getRangeAt(0);
+        var table=document.createElement('table');
+        $(table).html("<tr><td>123</td><td>123</td><td>123</td></tr><tr><td>123</td><td>123</td><td>123</td></tr>");
+        $(table).attr('border',1);
+        $(table).attr('cellspacing',0);
+        $(table).attr('cellpadding',5);
+        $(table).css('border-collapse','collapse');
+        range.insertNode(table);
+    });
+
+</script>
+</body>
+</html>
