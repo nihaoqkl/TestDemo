@@ -2,20 +2,20 @@ var EventBase = function () {};
 
 EventBase.prototype = {
     addListener:function (types, listener) {
-        types = utils.trim(types).split(/\s+/);
+        types = $.trim(types).split(/\s+/);
         for (var i = 0, ti; ti = types[i++];) {
             getListener(this, ti, true).push(listener);
         }
     },
     removeListener:function (types, listener) {
-        types = utils.trim(types).split(/\s+/);
+        types = $.trim(types).split(/\s+/);
         for (var i = 0, ti; ti = types[i++];) {
             utils.removeItem(getListener(this, ti) || [], listener);
         }
     },
     fireEvent:function () {
         var types = arguments[0];
-        types = utils.trim(types).split(' ');
+        types = $.trim(types).split(' ');
         for (var i = 0, ti; ti = types[i++];) {
             var listeners = getListener(this, ti),
                 r, t, k;

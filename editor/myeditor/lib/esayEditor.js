@@ -22,15 +22,6 @@
     //    isIE8 = appVersion === 'MSIE8.0';
     //}
 
-    var utils= {
-        selector:function(selector){
-            return $(selector).get(0);
-        },
-        type:function(value){
-            return Object.prototype.toString.call(value).split(" ")[1].replace(/\]/,'').toLowerCase();
-        }
-    }
-
 
     var eE = window.easyEditor = function(selector, options){
         return new eE.fn.init(selector, options);
@@ -65,7 +56,7 @@
                         '</ul></div>',
 
         }
-    })
+    });
 
     //初始化toolbar
     $.extend(eE.fn,{
@@ -101,6 +92,8 @@
                 index=this.getIndex(),
                 _frame=utils.selector('#'+$prefix+index),
                 _doc=_frame.contentWindow.document;
+
+            //工具条注册事件
             $('.toolBar'+this.getIndex()).find('a').each(function(i,v){
                 $(v).on('click',function(e){
                     var that = $(this);
@@ -108,23 +101,28 @@
                     _doc.execCommand(that.data('cmd'),false,'');
                 });
             });
+
+            //浮动条注册事件
             $('.floatBar'+this.getIndex()).find('a').each(function(i,v){
+
                 $(v).on('click',function(e){
                     var that = $(this);
                     _frame.focus();
                     _doc.execCommand(that.data('cmd'),false,null);
-                    if(that.hasClass('ee-remove')){
-                        that.on('click',function(){
-                            var selection=_doc.getSelection(),
-                                    range=_doc.getSelection().getRangeAt(0);
-                            // console.log(_doc.queryCommandState('bold')); //判断当前的range是否执行过
-                            if(utils.type(range)!='null' && range.toString().length>=1){
-                                // $(selection.anchorNode.parentNode).remove();
-                                range.deleteContents();
-                            }
-                        });
-                    }
                 });
+
+
+                if($(v).hasClass('ee-remove')){
+                    $(v).on('click',function(){
+                        var selection=_doc.getSelection(),
+                            range=selection.getRangeAt(0);
+                        // console.log(_doc.queryCommandState('bold')); //判断当前的range是否执行过
+                        if(utils.type(range)!='null' && range.toString().length>=1){
+                            // $(selection.anchorNode.parentNode).remove();
+                            range.deleteContents();
+                        }
+                    });
+                }
             });
 
             var getPoint={};
@@ -194,83 +192,17 @@
     //集成selection和range
     $.extend(eE.fn,{
         selection: {
+            get:function(doc){
 
+            }
         },
         range: {
 
         }
     });
 
-    //集成EventBase的事件
-    $.extend(eE.fn,{
-        addListener:function (types, listener) {
-            types =  $.trim(types).split(/\s+/);
-            for (var i = 0, ti; ti = types[i++];) {
-                getListener(this, ti, true).push(listener);
-            }
-        },
-        removeListener:function (types, listener) {
-            types = $.trim(types).split(/\s+/);
-            for (var i = 0, ti; ti = types[i++];) {
-                utils.removeItem(getListener(this, ti) || [], listener);
-            }
-        },
-        fireEvent:function () {
-            var types = arguments[0];
-            types = $.trim(types).split(' ');
-            for (var i = 0, ti; ti = types[i++];) {
-                var listeners = getListener(this, ti),
-                    r, t, k;
-                if (listeners) {
-                    k = listeners.length;
-                    while (k--) {
-                        if(!listeners[k])continue;
-                        t = listeners[k].apply(this, arguments);
-                        if(t === true){
-                            return t;
-                        }
-                        if (t !== undefined) {
-                            r = t;
-                        }
-                    }
-                }
-                if (t = this['on' + ti.toLowerCase()]) {
-                    r = t.apply(this, arguments);
-                }
-            }
-            return r;
-        },
-        on : function(types, listener){
-            return this.addListener(types,listener);
-        },
-        off : function(types, listener){
-            return this.removeListener(types, listener)
-        },
-        trigger:function(){
-            return this.fireEvent.apply(this,arguments);
-        }
-    });
-
-    /**
-     * 获得对象所拥有监听类型的所有监听器
-     * @method getListener
-     * @public
-     * @param { Object } obj  查询监听器的对象
-     * @param { String } type 事件类型
-     * @param { Boolean } force  为true且当前所有type类型的侦听器不存在时，创建一个空监听器数组
-     * @return { Array } 监听器数组
-     */
-    function getListener(obj, type, force) {
-        var allListeners;
-        type = type.toLowerCase();
-        return (
-                    ( allListeners = ( obj.__allListeners || force && ( obj.__allListeners = {} ) ) )
-                &&  ( allListeners[type] || force && ( allListeners[type] = [] ) )
-        );
-    }
-
-
-
+    //集成EventBase事件
+    utils.extend(eE.fn,EventBase.prototype,true);
     //重点！！！
     //构造函数是$E.fn.init，将构造函数的prototype指向$E.fn
     eE.fn.init.prototype = eE.fn;

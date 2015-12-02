@@ -1,0 +1,207 @@
+body {
+	margin: 0;
+	padding: 0;
+	background: #fafafa;
+	font-size: 12px;
+	overflow: auto;
+	height:100%;
+}
+
+@font-face {
+	font-family: digit;
+	src: url('../digital-7_mono.ttf') format("truetype");
+}
+
+
+
+@media (min-width: 320px) {
+	#mainDiv{
+		width: 100%;
+		height: 100%;
+	}
+}
+@media (min-width: 1024px) {
+	#mainDiv{
+		width: 1135px;
+		margin:120px auto 0 auto;
+		height: 100%;
+	}
+}
+
+@media (min-width: 320px) {
+	#loveHeart {
+		position: relative;
+		width: 100%;
+		height: 388px;
+	}
+}
+
+@media (min-width: 1024px) {
+	#loveHeart {
+		float: left;
+		position: relative;
+		width: 670px;
+		height: 625px;
+	}
+}
+
+#garden {
+	position:absolute;left:0;top:0;
+	width: 100%;
+	height: 100%;
+}
+@media (min-width:320px) {
+	#elapseClock {
+		font-size: 12px;
+		margin-top: 28px;
+		margin-bottom: 10px;
+	}
+}
+@media (min-width:1024px) {
+	#elapseClock {
+		font-size: 18px;
+		margin-top: 10px;
+		margin-bottom: 10px;
+	}
+}
+
+@media (min-width:320px){
+	#words {
+		width:100%;
+		margin:0;
+		padding-top:88px;
+		font-family: "sans-serif";
+		font-size: 24px;
+		color:#666;
+		text-align: center;
+	}
+}
+@media (min-width:1024px){
+	#words {
+		width:100%;
+		margin:130px auto 0 auto;
+		font-family: "sans-serif";
+		font-size: 24px;
+		color:#666;
+		text-align: center;
+	}
+}
+
+
+#messages{
+	display: none;
+}
+
+@media (min-width:320px){
+	#messages #sign{
+		margin-top:48px;
+		font-size:16px;
+	}
+}
+@media (min-width:1024px){
+	#messages #sign{
+		margin-top:78px;
+		font-size:28px;
+	}
+}
+
+@media (min-width:320px){
+	#elapseClock .digit{
+		font-family: "digit";
+		font-size: 28px;
+	}
+}
+
+@media (min-width:1024px){
+	#elapseClock .digit{
+		font-family: "digit";
+		font-size: 36px;
+	}
+}
+
+#loveu{
+	padding: 5px;
+	font-size: 22px;
+	margin-top: 80px;
+	margin-right: 120px;
+	text-align: right;
+	display: none;
+}
+
+#loveu .signature{
+	margin-top: 10px;
+	font-size: 20px;
+	font-style: italic;
+}
+
+#clickSound{
+	display:none;
+}
+
+@media (min-width: 320px) {
+	#code {
+		width: 100%;
+		color: #333;
+		font-family: "Consolas", "Monaco", "Bitstream Vera Sans Mono", "Courier New", "sans-serif";
+		font-family: "Lantinghei SC","Open Sans",Arial,"Hiragino Sans GB","Microsoft YaHei","微软雅黑",STHeiti,"WenQuanYi Micro Hei",SimSun,sans-serif;
+		font-size: 15px;
+		line-height: 1.6;
+		padding:20px 10px;
+	}
+}
+@media (min-width: 1024px) {
+	#code {
+		float: left;
+		width: 440px;
+		height: 400px;
+		color: #333;
+		font-family: "Consolas", "Monaco", "Bitstream Vera Sans Mono", "Courier New", "sans-serif";
+		font-family: "Lantinghei SC","Open Sans",Arial,"Hiragino Sans GB","Microsoft YaHei","微软雅黑",STHeiti,"WenQuanYi Micro Hei",SimSun,sans-serif;
+		font-size: 15px;
+		line-height: 1.8;
+	}
+}
+
+#code .string{
+	color: #2a36ff;
+}
+
+#code .keyword{
+	color: #7f0055;
+	font-weight:bold;
+}
+
+#code .placeholder{
+	margin-left:15px;
+}
+
+#code .space{
+	margin-left:7px;
+	color:#888;
+}
+
+#code .comments{
+	color: #333;
+	font-weight: 700;
+	font-size:18px;
+}
+
+#copyright{
+	margin-top: 10px;
+	text-align: center;
+	width:100%;
+	color:#666;
+}
+
+#errorMsg{
+	width: 100%;
+	text-align: center;
+	font-size: 24px;
+	position: absolute;
+	top: 100px;
+	left:0px;
+}
+
+#copyright a{
+	color:#666;
+}
