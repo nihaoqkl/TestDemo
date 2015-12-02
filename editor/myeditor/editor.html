@@ -18,11 +18,39 @@
         <div class="col-md-12" style="margin:10px;">
             <iframe src="" class="easyEditor" frameborder="no" border="0" marginwidth="0" marginheight="0" allowtransparency="yes"></iframe>
         </div>
+        <div class="col-md-12">
+            <button id="getHTML">获取编辑器内容(html格式)</button>
+            <button id="getText">获取编辑器内容(纯文本格式)</button>
+            <button id="insertPic">插入图片</button>
+        </div>
     </div>
 </div>
 <script>
     $(function(){
         var editor = easyEditor('.easyEditor');
+
+        var  _frame=utils.selector('#easyEditor_1'),
+                _window=_frame.contentWindow.document,
+                _doc=_frame.contentWindow.document;
+
+
+        $('#getHTML').on('click',function(){
+            console.log( $(_doc).find('body').html() );
+        });
+        $('#getText').on('click',function(){
+            console.log( $(_doc).find('body').text() );
+        });
+
+        $('#insertPic').on('click',function(){
+
+            var _selection=_doc.getSelection(),
+                  _range=_selection.getRangeAt(0);
+
+            _doc.body.focus();
+            if(utils.type(_range)!='null'){
+                _range.insertNode('<img src="" />')
+            }
+        });
     });
 </script>
 </body>
