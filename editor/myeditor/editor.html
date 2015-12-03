@@ -13,6 +13,17 @@
     <script src="./lib/esayEditor.js"></script>
 </head>
 <body>
+<div id="eE_imagescale_cover"></div>
+<div id="eE_imagescale" class="eE-scale">
+    <span class="eE-scale-hand0"></span>
+    <span class="eE-scale-hand1"></span>
+    <span class="eE-scale-hand2"></span>
+    <span class="eE-scale-hand3"></span>
+    <span class="eE-scale-hand4"></span>
+    <span class="eE-scale-hand5"></span>
+    <span class="eE-scale-hand6"></span>
+    <span class="eE-scale-hand7"></span>
+</div>
 <div class="container">
     <div class="row">
         <div class="col-md-12" style="margin:10px;">
@@ -20,8 +31,9 @@
         </div>
         <div class="col-md-12">
             <button id="getHTML">获取编辑器内容(html格式)</button>
-            <button id="getText">获取编辑器内容(纯文本格式)</button>
-            <button id="insertPic">插入图片</button>
+            <button id="getText">获取编辑器内容(纯文本格式)</button><br />
+            <div class=""><input id="moveFocusx" value="1" /><input id="moveFocusy" value="1" /><button id="moveFocus">移动光标</button></div>
+            <div class=""><input id="picLink" value="" /><input id="picLinkW" value="300" /><input id="picLinkH" value="300" /><button id="insertPic">插入图片</button></div>
         </div>
     </div>
 </div>
@@ -48,8 +60,27 @@
 
             _doc.body.focus();
             if(utils.type(_range)!='null'){
-                _range.insertNode('<img src="" />')
+                _range.insertNode($('<img class="eE-image" src="'+$('#picLink').val()+'" width="'+$('#picLinkW').val()+'" height="'+$('#picLinkH').val()+'" />').get(0));
             }
+        });
+
+        $('#moveFocus').on('click',function(){
+
+            var _selection=_doc.getSelection();
+//                  _range=_selection.getRangeAt(0);
+
+            _selection.collapse($(_doc).find('body').get(0),0);
+            var ter=$(_doc).find('body').get(0);
+
+            console.log(ter);
+            var _range=_doc.createRange();
+            _range.setStart(ter,1);
+            _range.setEnd(ter,2);
+            console.log(_range);
+            console.log(_range.toString());
+            _selection.removeAllRanges();  //全部remove所有range  再selection里添加range自动选中
+            _selection.addRange(_range);
+            $(_doc).find('body').get(0).focus(); //body获取次焦点，可以获取选中直接修改
         });
     });
 </script>

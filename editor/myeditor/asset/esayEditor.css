@@ -68,3 +68,78 @@
   border: 1px solid #eee;
   border-top: 0;
 }
+#eE_imagescale_cover {
+  position: absolute;
+  z-index: 999;
+  opacity: 0;
+}
+.eE-scale {
+  position: absolute;
+  border: 1px solid #3b77ff;
+  z-index: 999;
+}
+.eE-scale span {
+  position: absolute;
+  display: block;
+  width: 6px;
+  height: 6px;
+  overflow: hidden;
+  font-size: 0px;
+  background-color: #3C9DD0;
+}
+.eE-scale .eE-scale-hand0 {
+  cursor: nw-resize;
+  top: 0;
+  margin-top: -4px;
+  left: 0;
+  margin-left: -4px;
+}
+.eE-scale .eE-scale-hand1 {
+  cursor: n - resize;
+  top: 0;
+  margin-top: -4px;
+  left: 50%;
+  margin-left: -4px;
+}
+.eE-scale .eE-scale-hand2 {
+  cursor: ne - resize;
+  top: 0;
+  margin-top: -4px;
+  left: 100%;
+  margin-left: -3px;
+}
+.eE-scale .eE-scale-hand3 {
+  cursor: w - resize;
+  top: 50%;
+  margin-top: -4px;
+  left: 0;
+  margin-left: -4px;
+}
+.eE-scale .eE-scale-hand4 {
+  cursor: e - resize;
+  top: 50%;
+  margin-top: -4px;
+  left: 100%;
+  margin-left: -3px;
+}
+.eE-scale .eE-scale-hand5 {
+  cursor: sw - resize;
+  top: 100%;
+  margin-top: -3px;
+  left: 0;
+  margin-left: -4px;
+}
+.eE-scale .eE-scale-hand6 {
+  cursor: s - resize;
+  top: 100%;
+  margin-top: -3px;
+  left: 50%;
+  margin-left: -4px;
+}
+.eE-scale .eE-scale-hand7 {
+  cursor: se - resize;
+  top: 100%;
+  margin-top: -3px;
+  left: 100%;
+  margin-left: -3px;
+}

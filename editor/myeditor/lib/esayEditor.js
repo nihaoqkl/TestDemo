@@ -142,6 +142,35 @@
                 }
             });
 
+            $('#eE_imagescale_cover').on('click',function(){
+                $('#eE_imagescale').hide();
+                $('#eE_imagescale_cover').hide();
+            });
+
+            $(_doc).on('click','.eE-image',function(e){
+                var selection=_doc.getSelection(),
+                    range=selection.getRangeAt(0);
+                if(e.target!=this) {
+                    $('#eE_imagescale').hide();
+                    $('#eE_imagescale_cover').hide();
+                } else {
+                    if(utils.type(range)!='null'){
+                        $('#eE_imagescale').css({
+                            width:$(this).width()+2+'px',
+                            height:$(this).height()+2+'px',
+                            top:$(_frame).offset().top+$(this).offset().top-1+'px',
+                            left:$(_frame).offset().left+$(this).offset().left-1+'px',
+                        }).show();
+                        $('#eE_imagescale_cover').css({
+                            width:$(_doc).width()+2+'px',
+                            height:$(_doc).height()+2+'px',
+                            top:$(_frame).offset().top+$(this).offset().top-1+'px',
+                            left:$(_frame).offset().left+$(this).offset().left-1+'px',
+                        }).show();
+                    }
+                }
+            });
+
 
 
         },
