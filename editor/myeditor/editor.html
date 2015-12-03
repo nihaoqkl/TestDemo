@@ -82,6 +82,26 @@
             _selection.addRange(_range);
             $(_doc).find('body').get(0).focus(); //body获取次焦点，可以获取选中直接修改
         });
+
+
+        //自动匹配
+        var startPoint={x:0,y:0},dragFlag=false;
+        $(document).on('mousedown','.eE-scale-hand4',function(e){
+            startPoint={x:e.clientX,y:e.clientY};
+            dragFlag=true;
+        });
+        $(document).on('mousemove','.eE-scale-hand4',function(e){
+            var nowWidth=$('#eE_imagescale').width();
+            if(dragFlag && startPoint.x!=0)
+                $('#eE_imagescale').width(nowWidth+(e.clientX-startPoint.x));
+        });
+        $(document).on('mouseup','.eE-scale-hand4',function(){
+            startPoint={x:0,y:0};
+            dragFlag=false;
+        });
+
+
+
     });
 </script>
 </body>
