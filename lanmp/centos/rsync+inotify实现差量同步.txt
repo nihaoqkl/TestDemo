@@ -1,0 +1,122 @@
+rsync+inotify实现差量同步
+
+
+
+安装和配置rsync
+http://rsync.samba.org/
+
+# yum remove  rsync
+
+安装:
+
+tar -zxvf rsync-3.1.1.tar.gz
+
+cd rsync-3.1.1
+./configure --prefix=/usr/local/rsync --disable-ipv6
+make
+make install
+
+ln -s /usr/local/rsync/bin/rsync /usr/bin/rsync
+
+
+server端配置
+# vi /usr/local/rsync/rsyncd.conf
+pid file = /var/run/rsyncd.pid
+port = 873
+pid = root
+gid = root
+use chroot = no
+max connections = 200
+timeout 600
+lock file = /var/run/rsyncd.lock
+log file = /var/run/rsyncd.log
+secrets file = /usr/local/rsync/rsyncd.passwd 
+motd file = /etc/rsyncd.motd
+
+[test]
+path = /test/
+ignore errors
+read only = true
+list = false
+hosts allow = *
+#hosts deny = 0.0.0.0/32
+auth users = rsync  #该用户系统中存在且对后面指定的备份目录拥有权限
+comment = rsync from qklin
+ 
+
+
+#vi /usr/local/rsync/rsyncd.motd
+
+++++++++++++++++++++++++++++++++++++
+Wlecome to qklin rsync services       
+++++++++++++++++++++++++++++++++++++
+
+
+--指定rsync访问的密码,密码不需要和系统账号密码相同
+
+# vi /usr/local/rsync/rsyncd.passwd  
+rsync:rsyncpass
+
+
+ln -s /usr/local/rsync/rsyncd.conf /etc/rsyncd.conf
+ln -s /usr/local/rsync/rsyncd.motd /etc/rsyncd.motd
+ln -s /usr/local/rsync/rsyncd.passwd  /etc/rsyncd.passwd
+
+
+chmod 600 /usr/local/rsync/rsyncd.passwd
+
+chown root:root /usr/local/rsync/rsyncd.passwd
+
+
+
+启动rsync
+# /usr/bin/rsync --daemon --config=/etc/rsyncd.conf
+
+加入开机启动
+# echo "/usr/bin/rsync --daemon --config=/etc/rsyncd.conf" >> /etc/rc.d/rc.local 
+
+检查是否加入成功开机启动
+# cat /etc/rc.d/rc.local 
+
+/usr/bin/rsync --daemon
+
+
+# netstat -lntp | grep 873
+tcp        0      0 0.0.0.0:873                 0.0.0.0:*                   LISTEN      10689/rsync         
+tcp        0      0 :::873                      :::*                        LISTEN      10689/rsync   
+
+
+客户端配置
+
+
+(1).新建客户端密码文件(客户端不带用户名)
+
+#vi /etc/rsyncd.passwd
+rsyncpass
+
+#chmod 600 /etc/rsyncd.passwd
+rsync -vzrtopg --progress --delete  root@192.168.5.189::test /ocpyang/ --password-file=/etc/rsyncd.passwd
+
+
+
+(3).新建同步脚本
+
+# vi /rsync.sh
+
+	#!/bin/bash
+	rsync -vzrtopg --progress --delete  root@192.168.5.189::test /testbak/ --password-file=/etc/rsyncd.passwd
+
+
+(4).手动同步文件
+
+#cd /
+#./rsync.sh
+
+
+(5).自动同步:每隔五分钟同步一次
+# crontab -e
+0,5 * * * * /rsync.sh
+
+
+
+

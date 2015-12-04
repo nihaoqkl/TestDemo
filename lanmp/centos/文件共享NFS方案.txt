@@ -1,0 +1,39 @@
+安装NFS对应的服务
+
+
+1.安装NFS 套件
+	yum -y install nfs-utils rpcbind
+
+2.配置共享
+# cat /etc/exports
+/path/ xx.xx.xx.xx(insecure,rw,sync,no_root_squash)
+
+echo "service iptables stop" > /etc/rc.local
+cat /etc/rc.local
+	service iptables stop
+	
+service rpcbind start
+service nfs start
+chkconfig rpcbind on
+chkconfig nfs on
+
+
+
+客户端映射设置
+
+yum install -y showmount
+
+showmount -e 服务器
+
+mkdir /home/exp
+mount -t nfs nfs服務器IP:/共享的路径 /home/exp
+
+df
+
+设置开机自动挂载，在/etc/rc.local文件中添加如下行，这里需要注意通常设置开机自动挂载文件系统是通过配置/etc/fstab文件来实现的，但是由于在系统启动过程中，这个文件的执行要早于网络的启用，所以NFS的开机自动挂载不能通过配置这个文件来实现：
+
+mount –t nfs –o nolock node0:/home/cluster/mirror /home/cluster/mirror
+
+重启系统，如果成功挂载了node0的/home/cluster/mirror目录，则安装成功。
+
+

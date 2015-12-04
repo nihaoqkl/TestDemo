@@ -1,0 +1,6 @@
+Deprecated:  Automatically populating $HTTP_RAW_POST_DATA is deprecated and will be removed in a future version. To avoid this warning set 'always_populate_raw_post_data' to '-1' in php.ini and use the php://input stream instead. in <b>Unknown</b> on line <b>0</b><br />
+
+Cannot modify header information - headers already sent in Unknown on line 0
+
+设置php.ini
+always_populate_raw_post_data = -1 即可解决

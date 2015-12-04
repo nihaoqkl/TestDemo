@@ -125,11 +125,6 @@
                 }
             });
 
-            var getPoint={};
-            $document.on('mousemove',function(e){
-                getPoint={x: e.clientX,y: e.clientY}
-            });
-
             //浮动条和range检测处理等
             $(_doc).on('mouseup',function(e){
                 var range=_doc.getSelection().getRangeAt(0);
@@ -145,6 +140,7 @@
             $('#eE_imagescale_cover').on('click',function(){
                 $('#eE_imagescale').hide();
                 $('#eE_imagescale_cover').hide();
+                $('#eE-popup-bar').hide();
             });
 
             $(_doc).on('click','.eE-image',function(e){
@@ -154,6 +150,7 @@
                 if(e.target!=this) {
                     $('#eE_imagescale').hide();
                     $('#eE_imagescale_cover').hide();
+                    $('#eE-popup-bar').hide();
                 } else {
                     if(utils.type(range)!='null'){
                         $('#eE_imagescale').css({
@@ -167,6 +164,10 @@
                             height:$(_doc).height()+2+'px',
                             top:$(_frame).offset().top+$(this).offset().top-1+'px',
                             left:$(_frame).offset().left+$(this).offset().left-1+'px',
+                        }).show();
+                        $('#eE-popup-bar').css({
+                            top:$(_frame).offset().top+$(this).offset().top+$(this).width()+2+'px',
+                            left:$(_frame).offset().left+$(this).offset().left+1+'px',
                         }).show();
                     }
                 }
