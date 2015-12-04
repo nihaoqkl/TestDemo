@@ -7,6 +7,11 @@
     <link rel="stylesheet" href="./asset/icon/iconfont.css">
     <link rel="stylesheet" href="./asset/esayEditor.css">
     <script src="http://apps.bdimg.com/libs/jquery/1.11.1/jquery.js"></script>
+    <script>
+        function cachecurrentLinkElement(obj){
+            $('#currentLinkElement').data('element',obj);
+        }
+    </script>
     <script src="./lib/utils.js"></script>
     <script src="./lib/EventBase.js"></script>
     <script src="./lib/config.js"></script>
@@ -15,14 +20,15 @@
 <body>
 <div id="eE_imagescale_cover"></div>
 <div id="eE_imagescale" class="eE-scale">
-    <span class="eE-scale-hand0"></span>
-    <span class="eE-scale-hand1"></span>
-    <span class="eE-scale-hand2"></span>
-    <span class="eE-scale-hand3"></span>
-    <span class="eE-scale-hand4"></span>
-    <span class="eE-scale-hand5"></span>
-    <span class="eE-scale-hand6"></span>
-    <span class="eE-scale-hand7"></span>
+    <span class="eE-scale-hand eE-scale-hand0"></span>
+    <span class="eE-scale-hand eE-scale-hand1"></span>
+    <span class="eE-scale-hand eE-scale-hand2"></span>
+    <span class="eE-scale-hand eE-scale-hand3"></span>
+    <span class="eE-scale-hand eE-scale-hand4"></span>
+    <span class="eE-scale-hand eE-scale-hand5"></span>
+    <span class="eE-scale-hand eE-scale-hand6"></span>
+    <span class="eE-scale-hand eE-scale-hand7"></span>
+    <input type="hidden" id="currentLinkElement" value="">
 </div>
 <div class="container">
     <div class="row">
@@ -85,22 +91,34 @@
 
 
         //自动匹配
-        var startPoint={x:0,y:0},dragFlag=false;
-        $(document).on('mousedown','.eE-scale-hand4',function(e){
+        var startPoint={x:0,y:0},
+                dragFlag=false,
+                currentBound={width:0,height:0};
+        console.log(currentBound);
+        $(document).on('mousedown','.eE-scale-hand',function(e){
+            //计算出当前编辑内容的大小
+            currentBound={width:$('#eE_imagescale').width(),height:$('#eE_imagescale').height()},
             startPoint={x:e.clientX,y:e.clientY};
             dragFlag=true;
         });
-        $(document).on('mousemove','.eE-scale-hand4',function(e){
-            var nowWidth=$('#eE_imagescale').width();
-            if(dragFlag && startPoint.x!=0)
-                $('#eE_imagescale').width(nowWidth+(e.clientX-startPoint.x));
-        });
-        $(document).on('mouseup','.eE-scale-hand4',function(){
+        $(document).on('mouseup',function(){
             startPoint={x:0,y:0};
             dragFlag=false;
         });
 
+        $(document).on('mousemove',function(e){
+            var nowX = e.clientX, nowY = e.clientY;
+            var disX = nowX - startPoint.x, disY = nowY - startPoint.y;
+            var currentLinkElement=$('#currentLinkElement').data('element');
+            if(dragFlag && disX!=0){
+                if(true || flag=='右边的拉动'){
+                    $(currentLinkElement).width(currentBound.width+disX);
+                    $('#eE_imagescale').width(currentBound.width+disX);
+                }
 
+            }
+
+        });
 
     });
 </script>

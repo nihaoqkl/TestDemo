@@ -150,6 +150,7 @@
             $(_doc).on('click','.eE-image',function(e){
                 var selection=_doc.getSelection(),
                     range=selection.getRangeAt(0);
+                cachecurrentLinkElement(this);
                 if(e.target!=this) {
                     $('#eE_imagescale').hide();
                     $('#eE_imagescale_cover').hide();
